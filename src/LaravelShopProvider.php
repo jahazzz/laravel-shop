@@ -13,7 +13,6 @@ namespace Amsgames\LaravelShop;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Amsgames\LaravelShop\MigrationCommand;
 
 class LaravelShopProvider extends ServiceProvider
 {
@@ -32,15 +31,13 @@ class LaravelShopProvider extends ServiceProvider
      */
     public function boot()
     {
-        parent::boot();
-
         // Publish config files
         $this->publishes([
             __DIR__ . '/Config/config.php' => config_path('shop.php'),
         ]);
 
         // Register commands
-        $this->commands('command.laravel-shop.migration');
+        //$this->commands('command.laravel-shop.migration');
 
     }
 
@@ -112,7 +109,7 @@ class LaravelShopProvider extends ServiceProvider
      *
      * @param Router $route Router.
      */
-    public function map()
+    public function map(Router $router)
     {
         $router->group(['namespace' => 'Amsgames\LaravelShop\Http\Controllers'], function($router) {
 
@@ -126,5 +123,5 @@ class LaravelShopProvider extends ServiceProvider
 
         });
     }
-	
+
 }
